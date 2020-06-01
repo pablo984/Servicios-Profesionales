@@ -1,0 +1,9 @@
+import profesionales.*
+import universidades.*
+import empresas.*
+
+test "Test" {
+
+	assert.that(true)
+
+}
