@@ -3,7 +3,45 @@ import universidades.*
 import empresas.*
 
 test "Test" {
-
-	assert.that(true)
-
+	/*Instancias de Universidades*/
+	const sanMartin = new Universidad(provincia=#{"Buenos Aires"}, honorariosRecomendados=3500)
+	const rosario = new Universidad(provincia=#{"Santa Fe"}, honorariosRecomendados=2800)
+	const corrientes = new Universidad(provincia=#{"Corrientes"}, honorariosRecomendados=4200)
+	const hurlingham = new Universidad(provincia= #{"Buenos Aires"}, honorariosRecomendados=8800)
+	
+	/*Instancias de los profesionales*/
+	const juana = new ProfesionalVinculado(universidad=rosario)
+	const melina = new ProfesionalAsociado(universidad=corrientes)
+	const rocio = new ProfesionalLibre(universidad=hurlingham, 
+						   provinciasDondePuedeTrabajar=#{"Santa Fe", "Córdoba", "Buenos Aires"}, 
+						   honorariosPorHora=5000)
+	const luciana = new ProfesionalLibre(universidad=rosario,
+						    provinciasDondePuedeTrabajar=#{"Santa Fe", "Entre Rios"},
+						    honorariosPorHora=3200)
+	
+	/*Instancia de la empresa*/
+	const movistar = new EmpresaDeServicios(honorarioReferencia=3500)
+	
+	/*Contratación de los profesionales*/
+	movistar.contratarProfesional(juana)
+	movistar.contratarProfesional(melina)
+	movistar.contratarProfesional(rocio)
+	movistar.contratarProfesional(luciana)
+	
+	/*Test sobre los empleados*/
+	assert.equals(1, movistar.cuantosEstudiaronEn(hurlingham))
+	assert.equals(2, movistar.cuantosEstudiaronEn(rosario))
+	assert.equals(0, movistar.cuantosEstudiaronEn(sanMartin))
+	assert.equals(#{rocio}, movistar.profesionalesCaros())
+	assert.equals(#{rosario, corrientes, hurlingham}, movistar.universidadesFormadoras())
+	assert.equals(juana, movistar.elProfesionalMasBarato())
+	assert.that(movistar.esDeGenteAcotada())
+	
+	/*Agregado de provincias a Luciana*/ 
+	luciana.provinciasDondePuedeTrabajar(#{"Santa Fe", "Entre Rios", "Corrientes", "Misiones"})
+	
+	/*Test a la empresa nuevamente, ahora que se le agregaron provincias a Luciana*/
+	assert.notThat(movistar.esDeGenteAcotada())					    
+	
+	
 }

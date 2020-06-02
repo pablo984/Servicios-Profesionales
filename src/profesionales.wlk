@@ -1,4 +1,5 @@
-// esta clase está completa, no necesita nada más
+import universidades.*
+
 class ProfesionalAsociado {
 	var property universidad
 	
@@ -10,7 +11,6 @@ class ProfesionalAsociado {
 	}
 }
 
-
 class ProfesionalVinculado {
 	var property universidad
 	
@@ -18,21 +18,13 @@ class ProfesionalVinculado {
 		return universidad.provincia()
 	}	
 	method honorariosPorHora() { 
-		return universidad.honorarios()
+		return universidad.honorariosRecomendados()
 	}
-		
 }
-
 
 
 class ProfesionalLibre {
 	var property universidad
-	
-	method provinciasDondePuedeTrabajar() { 
-		return #{"Entre Ríos", "Corrientes", "Santa Fe"}
-	}	
-	method honorariosPorHora() { 
-		return 3000
-	}
-	
+	var property provinciasDondePuedeTrabajar = #{} /*String*/
+	var property honorariosPorHora
 }

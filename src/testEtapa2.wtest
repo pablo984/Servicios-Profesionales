@@ -1,0 +1,40 @@
+import profesionales.*
+import universidades.*
+import empresas.*
+import solicitantes.*
+
+
+
+test "Test en solicitantes" {
+	/*Instancias de los solicitantes*/
+	const pablo = new Persona(provinciaDondeVive="Buenos Aires")
+	const jose = new Persona(provinciaDondeVive="Corrientes")
+	const graciela = new Persona(provinciaDondeVive="Santa Fe")
+	const romina = new Persona(provinciaDondeVive="Córdoba")
+	
+	/*Instancias de Universidades*/
+	const sanMartin = new Universidad(provincia=#{"Buenos Aires"}, honorariosRecomendados=3500)
+	const rosario = new Universidad(provincia=#{"Santa Fe"}, honorariosRecomendados=2800)
+	const corrientes = new Universidad(provincia=#{"Corrientes"}, honorariosRecomendados=4200)
+	const hurlingham = new Universidad(provincia= #{"Buenos Aires"}, honorariosRecomendados=8800)
+	
+	/*Instancias de los profesionales*/
+	const juana = new ProfesionalVinculado(universidad=rosario)
+	const melina = new ProfesionalAsociado(universidad=corrientes)
+	const rocio = new ProfesionalLibre(universidad=hurlingham, 
+						   provinciasDondePuedeTrabajar=#{"Santa Fe", "Córdoba", "Buenos Aires"}, 
+						   honorariosPorHora=5000)
+	const luciana = new ProfesionalLibre(universidad=rosario,
+						    provinciasDondePuedeTrabajar=#{"Santa Fe", "Entre Rios"},
+						    honorariosPorHora=3200)
+	
+	/*Test sobre los profesionales que pueden atender a las Personas*/
+	assert.that(pablo.puedeSerAtendidoPor(rocio))
+	assert.notThat(jose.puedeSerAtendidoPor(juana))
+	assert.that(graciela.puedeSerAtendidoPor(luciana))
+	assert.notThat(romina.puedeSerAtendidoPor(melina))
+	
+	/*Instancias de las instituciones*/
+	
+
+}
